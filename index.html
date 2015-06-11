@@ -1,0 +1,172 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>WebRTC example</title>
+	<link href="CSS/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="CSS/Main.css" rel="stylesheet" />
+
+	<script src="scripts/jquery-2.0.3.min.js"></script>
+	<script src="scripts/jquery.tmpl.min.js"></script>
+
+	<script src="scripts/xrtc-1.4.0.js"></script>
+	<script src="scripts/Script.js"></script>
+
+	<script type="text/javascript" src="//use.typekit.net/lhk3lqa.js"></script>
+	<script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+</head>
+<body>
+	<!--<div id="console"></div>-->
+	<header class="band">
+		<div class="container">
+			<div id="logo"></div><!-- end #logo -->
+			<a href="https://manage.xirsys.com/signup" class="button">Signup</a><!-- end .button -->
+			<a href="https://github.com/xirsys" class="social-icons"><i class="icon-github"></i></a>
+			<a href="https://twitter.com/XirSys" class="social-icons"><i class="icon-twitter"></i></a>
+		</div><!-- end container -->
+	</header><!-- end .band -->
+
+	<div id="step1">
+		<div class="hero-unit">
+			<h1>Xirsys Chat Demo</h1>
+			<p>Enter a username, create a room id that you can share and connect with friends using WebRTC Technology</p>
+			<form id="join-form" class="form-horizontal">
+				<div class="control-group">
+					<label for="domain" class="control-label">Domain</label>
+					<div class="controls">
+						<input type="text" id="domain" name="domain" value="www.xirsys.com" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="application" class="control-label">Application</label>
+					<div class="controls">
+						<input type="text" id="application" name="application" value="default" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="room" class="control-label">Room</label>
+					<div class="controls">
+						<input type="text" id="room" name="room" value="default" />
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="name" class="control-label">Name (identity)</label>
+					<div class="controls">
+						<input type="text" id="name" name="name" value="John Doe" />
+					</div>
+				</div>
+				<input type="submit" value="Join" class="btn btn-primary btn-large" />
+			</form>
+		</div>
+	</div>
+
+	<div id="step2" class="container">
+		<h3 class="room-title pull-left">Test</h3>
+		<div>
+			<form id="connection-form" class="pull-right">
+				<strong>Connection type: </strong>
+				<label class="radio inline"><input type="radio" name="connectionType" value="" checked="checked" /> Default</label>
+				<label class="radio inline"><input type="radio" name="connectionType" value="direct" /> Direct</label>
+				<label class="radio inline"><input type="radio" name="connectionType" value="server" /> Server</label>
+			</form>
+		</div>
+
+		<div class="clear"></div>
+
+		<div id="chat-table" class="row">
+			<div id="contacts-cell" class="span4"></div>
+			<div class="span8">
+				<div id="video-cell">
+					<div id="video" class="row-fluid"></div>
+					<div class="clear"></div>
+				</div>
+				<td id="chat-cell">
+
+					<div class="chat-container well">
+						<div id="chat" class="input-block-level"></div>
+
+						<form id="chat-form">
+							<div class="input-append">
+								<input type="text" name="message" value="" placeholder="Input message here"  class="chat-input" />
+								<input type="submit" class="btn btn-info" value="Send" class="chat-button" />
+							</div>
+						</form>
+					</div>
+					
+
+					<fieldset id="ws-test" class="hide">
+						<legend>Websockets functionality (for test purpose)</legend>
+						<div class="ws-targetUser">
+							<input type="text" value="alex" placeholder="Input user name here" />
+						</div>
+						<div class="ws-message-type">
+							<select>
+								<option value="sendOffer">Offer</option>
+								<option value="sendAnswer">Answer</option>
+								<option value="sendIce">Ice</option>
+							</select>
+						</div>
+						<form id="ws-form">
+							<div class="ws-message">
+								<textarea placeholder="Input message here"></textarea>
+							</div>
+							<div class="ws-button">
+								<input type="submit" class="btn btn-info" value="Send via WebSokets" />
+							</div>
+							<div class="clear"></div>
+						</form>
+					</fieldset>
+				</td>
+			</div><!-- span8 -->
+		</div> <!-- chat-table -->
+	</div><!-- step2 -->
+
+	<script type="text/x-jquery-tmpl" id="contacts-info-tmpl">
+		<fieldset id="contacts-block" class="well">
+			<div id="contacts"></div>
+		</fieldset>
+	</script>
+
+	<script type="text/x-jquery-tmpl" id="contact-info-tmpl">
+		<div class="contact {{if isMe}}my{{/if}}" data-name="${name}">
+			<div class="name">${name}</div>
+			{{if !isMe}}
+			<div class="buttons">
+				<button class="btn btn-mini btn-info connect"><span class="icon-pause"></span> Connect</button>
+				<span class="label label-info connecting">Connecting...</span>
+
+				<button class="btn btn-mini btn-danger disconnect">Disconnect</button>
+				<span class="label label-important disconnecting">Disconnecting...</span>
+			</div>
+			{{/if}}
+			<div class="clear"></div>
+		</div>
+	</script>
+
+	<script type="text/x-jquery-tmpl" id="chat-message-tmpl">
+		<div class="message {{if isMy}}my{{/if}}">
+			<span class="name">${name}:</span>
+			<span class="text">${message}</span>
+		</div>
+	</script>
+
+	<script type="text/x-jquery-tmpl" id="video-tmpl">
+		<div class="person {{if isMe}}my{{/if}} span6 well" data-name="${name}">
+			<div class="video">
+				<video class="hide" id="${id}"></video>
+			</div>
+			<h5 class="name pull-left">${name}</h5>
+			<div class="buttons btn-group pull-right">
+				{{if isVideoAvailable}}
+				<button class="mute-video disable btn btn-small"><span class="icon-pause"></span></button>
+				<button class="mute-video enable  btn btn-small active hide"><span class="icon-play"></span></button>
+				{{/if}}
+				
+				{{if isAudioAvailable}}
+				<button class="mute-audio disable btn btn-small"><span class="icon-volume-off"></span></button>
+				<button class="mute-audio enable  btn btn-small active hide"><span class="icon-volume-up"></span></button>
+				{{/if}}
+			</div>
+		</div>
+	</script>
+</body>
+</html>

@@ -1,0 +1,343 @@
+﻿body {
+	font-size:18px;
+	line-height:1.5em;
+	font-family: "proxima-nova", helvetica, arial, sans-serif;
+	font-weight:100;
+	color:#4F6367;
+}
+
+h1, h2, h3, h4, h5, h6{
+	color:#1C2224;
+}
+
+.clear {
+	clear: both;
+	height: 0;
+}
+
+.button {
+	background:#86CE11;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px; 
+	border-radius: 3px;
+	display:inline-block;
+	color:#ffffff;
+	padding:5px 20px;
+	text-transform:uppercase;
+	font-size:13px;
+	line-height:13px;
+	font-weight:400;
+}
+
+.button:hover {
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px; 
+	border-radius: 3px;
+	background: #86ce11; /* Old browsers */
+	/* IE9 SVG, needs conditional override of 'filter' to 'none' */
+	background: -moz-linear-gradient(top,  #86ce11 0%, #7cc400 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#86ce11), color-stop(100%,#7cc400)); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top,  #86ce11 0%,#7cc400 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top,  #86ce11 0%,#7cc400 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top,  #86ce11 0%,#7cc400 100%); /* IE10+ */
+	background: linear-gradient(to bottom,  #86ce11 0%,#7cc400 100%); /* W3C */
+}
+
+/*----------------------------------------- Header ---------------------------------------------------*/
+header.band {background:#1C2224; }
+
+.touch header.band {
+position:relative;
+}
+
+header .container {
+padding-top:15px;
+padding-bottom:15px;
+}
+header .button {
+font-size:13px;
+float:right;
+line-height:20px;
+margin-top:5px;
+margin-left: 1em;
+cursor:pointer;
+}
+
+#logo {
+width:130px;
+height:40px;
+background:url(../Images/logo.png) no-repeat;
+display:block;
+float:left;
+}
+
+.svg #logo {
+background:url(../Images/logo.svg) no-repeat;
+}
+
+.social-icons{
+	float: right;
+	padding: 8px 0.5em 0;
+}
+
+.social-icons i {
+	font-size: 1.3em;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  -ms-transition: all 0.3s ease;
+  -o-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+
+.social-icons:hover i{ color: #86CE11; }
+
+
+
+/*----------------------------------------- Step 1 ---------------------------------------------------*/
+
+#step1{
+	margin-top: 4em;
+}
+
+#step1 .hero-unit{
+	width: 500px;
+	margin: 0 auto;
+	padding: 20px 50px 20px 20px;	
+}
+
+#step1 label{
+	width: 80px;
+	text-align: left;
+}
+
+#step1 .form-horizontal .controls{
+	margin-left: 100px;
+}
+
+/*-----------------------------------------  ---------------------------------------------------*/
+
+#connection-form strong{
+	display: inline-block;
+	font-size: 14px;
+	line-height: 20px;
+	padding-right: 1em;
+}
+
+#connection-form .radio.inline{
+	vertical-align: inherit;
+}
+
+#chat-table {
+}
+
+#video {
+}
+
+#contacts-cell {}
+
+#chat-cell {
+	padding: 0 20px;
+	height: 300px;
+	vertical-align: top;
+}
+
+.chat-container{
+	padding-bottom: 5px;
+}
+
+#chat-form{
+	margin-bottom: 0;
+}
+
+table.form th,
+table.form td {
+	text-align: left;
+	padding: 2px 5px 2px 0;
+	vertical-align: middle;
+}
+
+table.form .button-block {
+	text-align: right;
+}
+
+#form {
+	display: block;
+	padding: 20px;
+}
+
+#step2 {
+	display: none;
+	padding: 20px 50px 20px 20px;
+}
+
+/* Video */
+.person {
+	padding-bottom: 6px;
+}
+
+.person .name {
+	height: 20px;
+	font: 600 14px/20px Arial;
+	color: #000;
+}
+
+.person .video {
+	background: #FFF url("../Images/video-bg.png") center center no-repeat;
+}
+
+.person .video video {
+	display: block;
+	max-width: 100%;
+}
+
+.person .buttons {
+	padding: 5px 0;
+}
+
+.person .buttons .mute-video,
+.person .buttons .mute-audio {
+}
+
+.person.my .name {
+	color: #F00;
+}
+
+/* Contacts */
+#contacts-block {
+	height: 600px;
+}
+
+#contacts-block legend {
+	font: 600 16px/20px Arial;
+	margin: 0 10px;
+	padding: 3px;
+	border: none;
+	color: #008000;
+}
+
+#contacts {
+	overflow: auto;
+}
+
+.contact {
+	height: 30px;
+	padding: 0.4em 0;
+	border-bottom: 1px dashed #d9d9d9;
+}
+
+.contact .name {
+	font: 600 14px/30px Arial;
+	color: #000;
+	float: left;
+}
+
+.contact .buttons {
+	float: right;
+}
+
+.contact .buttons * {
+	display: none;	
+}
+
+.contact.my .name {
+	color: #F00;
+}
+
+.contact.my .buttons {
+	display: none;
+}
+
+#contacts.not-ready .buttons * {
+	display: none;
+}
+
+#contacts.ready	.buttons .connect {
+	display: inline-block;
+}
+
+#contacts.connecting .contact.current .buttons .connecting {
+	display: inline;
+}
+
+#contacts.connected .contact.current .buttons .disconnect {
+	display: inline-block;
+}
+
+#contacts.disconnecting .contact.current .buttons .disconnecting {
+	display: inline;
+}
+
+/* Chat */
+#chat {
+	padding: 5px;
+	height: 200px;
+	overflow: auto;
+	margin: 0 0 20px;
+}
+
+#chat .message {
+	padding: 3px 0;
+}
+
+#chat .message .name {
+	font-weight: 600;
+}
+
+#chat .message.my .name {
+	color: #F00;
+}
+
+#chat .message.my .text {
+	color: #666;
+}
+
+
+#chat-form .chat-input {
+	width: 500px;
+}
+
+#chat-form .chat-button, #ws-form .chat-button {
+	float: right;
+	width: 10%;
+	text-align: right;
+}
+
+#chat-form .chat-input input, #ws-form .chat-input input {
+	width: 100%;
+}
+
+/*WS Test Area*/
+
+#ws-form .ws-message textarea {
+	width: 90%;
+	height: 200px;
+}
+
+/* Console */
+#console {
+	border: 1px solid #000;
+	height: 200px;
+	overflow: auto;
+	margin: 5px;
+	padding: 5px;
+}
+
+#console .item {
+	margin: 3px 0;	
+}
+
+#console .item.info {
+	color: #888;
+}
+
+#console .item.error {
+	color: #F00;
+}
+
+#console .item.warning {
+	color: #00F;
+}
+
+#console .item.debug {
+	color: #F55;
+}
